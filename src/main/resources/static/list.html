@@ -15,20 +15,25 @@
 
 <div class="container">
     <div>
-        <h2>Listas de compra:</h2>
-        <ul id="my-lists" class="list-group">
+        <h2>Produtos [<span id="listId"></span>]: </h2>
+        <ul id="products" class="list-group">
         </ul>
     </div>
 </div>
 <script type="text/javascript">
-    var lists = $.get("/api/lists", function (data) {
-        $.each(data, function (i, myList) {
-            $("#my-lists").append(
-                '<a href="list.html?id=' + myList.id + '"><li class="list-group-item d-flex justify-content-between align-items-center">' + myList.date +
-                '<span class="badge badge-primary badge-pill">' + myList.id + '</span>' +
-                '<span class="badge badge-info">' + myList.products.length + '</span></li></a>');
+    var url = new URL(window.location.href);
+    var id = url.searchParams.get("id");
+    $("#listId").text(id);
+
+    var products = $.get("/api/lists/" + id, function (data) {
+        $("#listId").text(data.date);
+        $.each(data.products, function (i, product) {
+            $("#products").append(
+                '<li class="list-group-item d-flex justify-content-between align-items-center">' + product.name +
+                '<span class="badge badge-primary badge-pill">' + product.quantity + '</span></li>');
         });
     });
+
 </script>
 
 </body>
