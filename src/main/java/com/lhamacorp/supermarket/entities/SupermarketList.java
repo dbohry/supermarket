@@ -13,17 +13,20 @@ import java.util.List;
 public class SupermarketList {
 
     @Id
-    private Long id;
+    private String id;
     private LocalDate date;
     private List<Product> products;
 
-    public SupermarketList(Long id, LocalDate date, List<Product> products) {
+    public SupermarketList() {
+    }
+
+    public SupermarketList(String id, LocalDate date, List<Product> products) {
         this.id = id;
         this.date = date;
         this.products = products;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

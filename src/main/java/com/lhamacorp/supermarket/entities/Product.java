@@ -3,28 +3,30 @@ package com.lhamacorp.supermarket.entities;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.annotation.Generated;
+
+@Document(collection = "products")
 public class Product {
 
-    private Long id;
     private String name;
-    private String quantity;
+    private Integer quantity;
 
-    public Product(Long id, String name, String quantity) {
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
+    public Product() {
     }
 
-    public Long getId() {
-        return id;
+    public Product(String name, Integer quantity) {
+        this.name = name;
+        this.quantity = quantity;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
@@ -37,7 +39,6 @@ public class Product {
         Product product = (Product) o;
 
         return new EqualsBuilder()
-                .append(id, product.id)
                 .append(name, product.name)
                 .append(quantity, product.quantity)
                 .isEquals();
@@ -46,7 +47,6 @@ public class Product {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(id)
                 .append(name)
                 .append(quantity)
                 .toHashCode();
@@ -55,7 +55,6 @@ public class Product {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("id", id)
                 .append("name", name)
                 .append("quantity", quantity)
                 .toString();
